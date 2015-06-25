@@ -6,10 +6,6 @@ CFLAGS +=
 
 LDFLAGS += -L$(SDKSTAGE)/usr/lib/ 
 LDFLAGS += -lc -lpthread 
-LDFLAGS += -ljansson
-#LDFLAGS += -ldbus
-
-INCLUDES += 
 
 SRC = 
 SRC += utils.c

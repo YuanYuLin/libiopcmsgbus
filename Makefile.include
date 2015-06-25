@@ -1,6 +1,6 @@
-CROSS_COMPILE = gcc
-STRIP = strip
-#CROSS_COMPILE = arm-none-linux-gnueabi-gcc
+CROSS_COMPILE = arm-none-linux-gnueabi-
+STRIP = $(CROSS_COMPILE)strip
+CC = $(CROSS_COMPILE)gcc
 
 CFLAGS += -fPIC -Wall
 LDFLAGS += -shared
@@ -10,13 +10,13 @@ all: $(TARGET)
 
 %.o: %.c
 	@rm -f $@
-	$(CROSS_COMPILE) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 version:
 	bash gen_version.sh > version.h
 
 $(TARGET): version $(OBJS)
-	$(CROSS_COMPILE) $(LDFLAGS) $(OBJS) -o $@
+	$(CC) $(LDFLAGS) $(OBJS) -o $@
 
 clean:
 	@for i in $(OBJS); do (if test -e "$$i"; then ( rm $$i ); fi ); done
